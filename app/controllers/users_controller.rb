@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  protect_from_forgery except: :create
+  protect_from_forgery except: %i[ create verify ]
   before_action :set_user, only: %i[ show update destroy ]
   before_action :authorize_request, except: :create
   # GET /users or /users.json
@@ -15,18 +15,24 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
-
+    p "@user: #{@user.inspect}"
+    if params[:password] == params[:password_confirmation]
+      @user.password = params[:password]
       if @user.save
-        render :show, status: :created, location: @user
+        render json: @user, status: :created
       else
         render json: @user.errors, status: :unprocessable_entity
       end
+    else
+      @user.errors.add(:password_confirmation, "password confirmation not matching")
+      render json: @user.errors, status: :unprocessable_entity
+    end
   end
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
       if @user.update(user_params)
-        render :show, status: :ok, location: @user
+        render json: @user, status: :ok
       else
         render json: @user.errors, status: :unprocessable_entity
       end
@@ -42,6 +48,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def verify
+    
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -50,7 +60,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      p "#{params.inspect}------"
-      params.require(:user).permit(:name, :email, :number, :address, :password)
+      params.require(:user).permit(:name, :email, :number, :address, :password, :password_confirmation)
     end
 end
