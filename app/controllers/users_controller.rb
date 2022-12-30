@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   protect_from_forgery except: %i[ create verify ]
   before_action :set_user, only: %i[ show update destroy ]
   before_action :authorize_request, except: :create
+  # wrap_parameters :user, include: [:password, :password_confirmation]
+
+
   # GET /users or /users.json
   def index
     @users = User.all
@@ -48,10 +51,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def verify
-    
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -60,6 +59,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :number, :address, :password, :password_confirmation)
+      params.require(:user).permit(:photo, :name, :email, :number, :address, :password, :password_confirmation)
     end
 end

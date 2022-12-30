@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :carts
+  resources :cart_items
+  namespace :category do
+    resources :categories
+  end
+  resources :products
   resources :users
   # resources :auth
   get 'login', to: 'auth#login'

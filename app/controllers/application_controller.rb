@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   def not_found
-    render json: { error: 'not_found' }
+    render json: { error: 'not_found', status: :not_found }
+  end
+
+  def unauthorized
+    render json: { error: 'unauthorized access', status: :unauthorized }
   end
   
   def authorize_request
