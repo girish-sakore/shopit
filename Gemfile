@@ -33,9 +33,6 @@ gem "jbuilder"
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
-# active admin
-gem 'activeadmin', '~> 2.6', '>= 2.6.1'
-
 # jwt for auth
 gem 'jwt'
 
@@ -57,14 +54,17 @@ gem "sassc-rails"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 
-# custom skin 
+# active admin
+gem 'activeadmin', '~> 2.6', '>= 2.6.1'
+
+# custom skin for active admin
 gem 'active_skin'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'byebug', '~> 11.1', '>= 11.1.3'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'factory_bot_rails'
-  gem 'byebug', '~> 11.1', '>= 11.1.3'
 end
 
 group :development do
