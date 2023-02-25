@@ -4,10 +4,10 @@ class UsersController < ApplicationController
   before_action :authorize_request, except: :create
   # wrap_parameters :user, include: [:password, :password_confirmation]
 
-
   # GET /users or /users.json
   def index
-    @users = User.all
+    # @users = User.all
+    unauthorized
   end
 
   # GET /users/1 or /users/1.json
@@ -18,7 +18,6 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
-    p "@user: #{@user.inspect}"
     if params[:password] == params[:password_confirmation]
       @user.password = params[:password]
       if @user.save
@@ -34,11 +33,11 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-      if @user.update(user_params)
-        render json: @user, status: :ok
-      else
-        render json: @user.errors, status: :unprocessable_entity
-      end
+    if @user.update(user_params)
+      render json: @user, status: :ok
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
   end
 
   # DELETE /users/1 or /users/1.json

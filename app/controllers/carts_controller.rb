@@ -2,40 +2,37 @@ class CartsController < ApplicationController
   before_action :set_cart, only: %i[ show update destroy ]
 
   # GET /carts
-  # GET /carts.json
   def index
     @carts = Cart.all
+    json: @carts, status: :ok
   end
 
   # GET /carts/1
-  # GET /carts/1.json
   def show
+    json: @cart, status: :ok
   end
 
   # POST /carts
-  # POST /carts.json
   def create
     @cart = Cart.new(cart_params)
 
     if @cart.save
-      render :show, status: :created, location: @cart
+      render json: @cart, status: :created
     else
       render json: @cart.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /carts/1
-  # PATCH/PUT /carts/1.json
   def update
     if @cart.update(cart_params)
-      render :show, status: :ok, location: @cart
+      render json: @cart, status: :ok
     else
       render json: @cart.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /carts/1
-  # DELETE /carts/1.json
   def destroy
     @cart.destroy
   end

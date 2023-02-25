@@ -2,19 +2,17 @@ class CartItemsController < ApplicationController
   before_action :set_cart_item, only: %i[ show update destroy ]
 
   # GET /cart_items
-  # GET /cart_items.json
   def index
     @cart_items = CartItem.all
+    render json: @cart_items, status: :ok
   end
 
   # GET /cart_items/1
-  # GET /cart_items/1.json
   def show
-    render json: @cart_item
+    render json: @cart_item, status: :ok
   end
 
   # POST /cart_items
-  # POST /cart_items.json
   def create
     @cart_item = CartItem.new(cart_item_params)
 
@@ -26,7 +24,6 @@ class CartItemsController < ApplicationController
   end
 
   # PATCH/PUT /cart_items/1
-  # PATCH/PUT /cart_items/1.json
   def update
     if @cart_item.update(cart_item_params)
       render json: @cart_item, status: :ok
@@ -36,7 +33,6 @@ class CartItemsController < ApplicationController
   end
 
   # DELETE /cart_items/1
-  # DELETE /cart_items/1.json
   def destroy
     render json: @cart_item.destroy, status: :accepted
   end

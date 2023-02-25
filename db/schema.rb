@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_30_131811) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_02_095053) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -99,6 +99,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_30_131811) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "categories_products", id: false, force: :cascade do |t|
+    t.integer "category_id", null: false
+    t.integer "product_id", null: false
+    t.index ["category_id"], name: "index_categories_products_on_category_id"
+    t.index ["product_id"], name: "index_categories_products_on_product_id"
+  end
+
   create_table "otps", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "code"
@@ -115,8 +122,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_30_131811) do
     t.string "features"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "category_id"
-    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
