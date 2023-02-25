@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resources :products
   resources :users
   # resources :auth
-  get 'login', to: 'auth#login'
-  post 'register', to: 'users#create'
+  post 'user/login', to: 'auth#login'
+  post 'user/register', to: 'users#create'
   # post '/login', to: 'users#logn'
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

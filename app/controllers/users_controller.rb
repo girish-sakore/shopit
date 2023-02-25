@@ -10,12 +10,12 @@ class UsersController < ApplicationController
     unauthorized
   end
 
-  # GET /users/1 or /users/1.json
+  # GET /users/1 
   def show
     render json: @user
   end
 
-  # POST /users or /users.json
+  # POST /users
   def create
     @user = User.new(user_params)
     if params[:password] == params[:password_confirmation]
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1 or /users/1.json
+  # PATCH/PUT /users/1
   def update
     if @user.update(user_params)
       render json: @user, status: :ok
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1 or /users/1.json
+  # DELETE /users/1
   def destroy
     response = @user.destroy
     if response
@@ -58,6 +58,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:photo, :name, :email, :number, :address, :password, :password_confirmation)
+      params.permit(:photo, :name, :email, :number, :address, :password, :password_confirmation)
     end
 end
