@@ -60,17 +60,20 @@ gem 'activeadmin', '~> 2.6', '>= 2.6.1'
 # custom skin for active admin
 gem 'active_skin'
 
+gem 'rack-cors'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'byebug', '~> 11.1', '>= 11.1.3'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'factory_bot_rails'
+  gem 'simplecov', '~> 0.12.0'
+  gem 'solargraph', '~> 0.48.0'
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
